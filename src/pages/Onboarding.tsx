@@ -87,7 +87,7 @@ export default function Onboarding() {
             bmi, bmr, tdee,
             target_calories: cals,
             ...macros,
-          },
+          } as any,
           { onConflict: "user_id" }
         );
       if (error) throw error;
