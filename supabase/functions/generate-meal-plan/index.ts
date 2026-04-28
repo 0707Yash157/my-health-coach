@@ -49,9 +49,18 @@ Deno.serve(async (req) => {
       });
     }
 
-    const systemPrompt = `You are a certified clinical nutritionist. Design science-based, balanced, realistic single-day meal plans personalized to the user's metrics, goals, dietary preference, and allergies. Use varied whole foods. Match macros within ±8%.`;
+    const systemPrompt = `You are a certified clinical nutritionist who specializes in BUDGET-FRIENDLY, POCKET-FRIENDLY meal planning. Design science-based, balanced, realistic single-day meal plans personalized to the user's metrics, goals, dietary preference, and allergies.
 
-    const userPrompt = `Create a personalized 1-day meal plan.
+STRICT BUDGET RULES (very important):
+- Use only cheap, widely-available everyday staples: oats, rice, whole wheat / atta / roti, pasta, potatoes, sweet potatoes, seasonal vegetables (cabbage, carrots, spinach, onions, tomatoes), bananas, apples, in-season fruits, eggs, milk, curd/yogurt, paneer, dals/lentils, chickpeas, rajma, beans, soya chunks, peanuts, peanut butter, frozen vegetables, canned tuna/sardines, chicken thighs/legs (cheaper than breast), seasonal local produce.
+- AVOID expensive or premium items: salmon, prawns, avocado, almond/cashew butter, quinoa, chia seeds, protein powder, berries (unless local & cheap), imported cheeses, granola, protein bars, smoked meats, Greek yogurt (unless local equivalent is cheap).
+- Reuse the same staple ingredients across meals to minimize grocery cost and waste.
+- Prefer home-cooked simple recipes over restaurant-style or processed foods.
+- Keep ingredient lists short (5–8 items per meal max).
+
+Match macros within ±10%. Use varied but inexpensive whole foods.`;
+
+    const userPrompt = `Create a personalized BUDGET-FRIENDLY 1-day meal plan that is easy on the pocket.
 
 User profile:
 - Age: ${age}, Gender: ${gender}
@@ -67,7 +76,9 @@ Daily targets:
 - Carbs: ${Math.round(carbs_g)}g
 - Fat: ${Math.round(fat_g)}g
 
-Return 4 meals: breakfast, lunch, dinner, snack. Each meal must include name, short description, ingredients (array of strings), calories, protein_g, carbs_g, fat_g. Also return a "tips" array with 3 short, actionable nutrition tips for this user.`;
+Return 4 meals: breakfast, lunch, dinner, snack. Each meal must use cheap, common pantry staples (see system rules) and include name, short description (mention it is budget-friendly), ingredients (array of strings, 5–8 cheap items), calories, protein_g, carbs_g, fat_g.
+
+Also return a "tips" array with 3 short, actionable MONEY-SAVING nutrition tips tailored to this user (e.g. buying in bulk, seasonal produce, cheap protein swaps, batch cooking).`;
 
     const tools = [{
       type: "function",
